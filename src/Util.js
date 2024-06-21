@@ -139,10 +139,15 @@ export const disposeAllMeshes = (object3D) => {
 };
 
 export const delayedExecute = (func, fast) => {
-    return new Promise((resolve) => {
-        window.setTimeout(() => {
-            resolve(func());
-        }, fast ? 1 : 50);
+    return new Promise((resolve, reject) => {
+        // Use global setTimeout instead of window.setTimeout
+        setTimeout(() => {
+            try {
+                resolve(callback());
+            } catch (e) {
+                reject(e);
+            }
+        }, 0);
     });
 };
 
