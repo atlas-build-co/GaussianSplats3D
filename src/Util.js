@@ -143,11 +143,11 @@ export const delayedExecute = (func, fast) => {
         // Use global setTimeout instead of window.setTimeout
         setTimeout(() => {
             try {
-                resolve(callback());
+                resolve(func());
             } catch (e) {
                 reject(e);
             }
-        }, 0);
+        }, fast ? 1 : 50);
     });
 };
 
